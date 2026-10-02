@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Application</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>Edit Job Application</h1>
+            <p>Update your application information.</p>
+        </header>
+
+        <section class="form-section">
+
+            <form action="{{ url_for('edit_application', application_id=application['id']) }}" method="POST">
+
+                <div class="form-group">
+                    <label for="company">Company</label>
+
+                    <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        value="{{ application['company'] }}"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="position">Job Position</label>
+
+                    <input
+                        type="text"
+                        id="position"
+                        name="position"
+                        value="{{ application['position'] }}"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="date_applied">Date Applied</label>
+
+                    <input
+                        type="date"
+                        id="date_applied"
+                        name="date_applied"
+                        value="{{ application['date_applied'] }}"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Application Status</label>
+
+                    <select id="status" name="status">
+
+                        <option value="Applied"
+                            {% if application['status'] == 'Applied' %}selected{% endif %}>
+                            Applied
+                        </option>
+
+                        <option value="Interview"
+                            {% if application['status'] == 'Interview' %}selected{% endif %}>
+                            Interview
+                        </option>
+
+                        <option value="Rejected"
+                            {% if application['status'] == 'Rejected' %}selected{% endif %}>
+                            Rejected
+                        </option>
+
+                        <option value="Accepted"
+                            {% if application['status'] == 'Accepted' %}selected{% endif %}>
+                            Accepted
+                        </option>
+
+                    </select>
+                </div>
+
+                <button type="submit">
+                    Save Changes
+                </button>
+
+            </form>
+
+        </section>
+
+    </div>
+
+</body>
+</html>
